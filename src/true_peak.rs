@@ -169,6 +169,11 @@ impl TruePeak {
     ) {
         self.interp.check_true_peak(src, peaks)
     }
+
+    pub fn seed<'a, T: Sample + 'a, S: crate::Samples<'a, T>>(&mut self, src: S) {
+        let mut true_peaks = vec![0.0; src.channels()];
+        self.interp.check_true_peak(src, &mut true_peaks)
+    }
 }
 
 #[cfg(feature = "c-tests")]
